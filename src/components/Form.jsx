@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Message from "./Message";
+import { split } from "postcss/lib/list";
 
 export default function Form() {
   const [bill, setBill] = useState("");
@@ -10,6 +11,7 @@ export default function Form() {
   const avgTip = (tip + friendTip) / 2;
   const tipAmount = Number(((avgTip / 100) * bill).toFixed(2));
   const total = tipAmount + bill;
+  const split = Number((total / 2).toFixed(2));
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -90,7 +92,12 @@ export default function Form() {
       </button>
       {display && (
         <Message className="message mt-8 p-6 bg-gray-100 border border-gray-200 rounded-md shadow-md">
-          You pay ${total} (${bill} + ${tipAmount} tip)
+          Your total is ${total} (${bill} + ${tipAmount} tip)
+        </Message>
+      )}
+      {display && (
+        <Message className="message mt-8 p-6 bg-gray-100 border border-gray-200 rounded-md shadow-md">
+          Your split bill amount is ${split} each
         </Message>
       )}
     </div>
